@@ -6,10 +6,10 @@ export class CatDto {
   @IsString()
   name: string;
 
-  toEntity(): Cat{
+  toEntity(): Cat {
     const cat = new Cat();
     cat.id = uuid();
     cat.name = this.name;
     return cat;
-   }
+  }
 }
