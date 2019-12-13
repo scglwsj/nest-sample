@@ -1,0 +1,25 @@
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { Cat } from './cats';
+import { ICatsDa } from './cats.da.interface';
+
+@Injectable()
+export class CatsService {
+  constructor(private readonly catsDa: ICatsDa) {}
+
+  async create(cat: Cat): Promise<void> {
+    await this.catsDa.create(cat);
+  }
+
+  findAll(): Promise<Cat[]> {
+    return this.catsDa.findAll();
+  }
+
+  async findOne(id: string): Promise<Cat> {
+    const cat = await this.catsDa.findOne(id);
+    if (!cat) {
+      throw new NotFoundException(`cat ${id} not found!`);
+    }
+
+    return cat;
+  }
+}

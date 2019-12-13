@@ -1,25 +1,26 @@
 import { Controller, Get, Post, Body, HttpCode, Param } from '@nestjs/common';
 import { CatDto } from './cats.dto';
 import { Cat } from './cats';
+import { CatsService } from './cats.service';
+import { IsString } from 'class-validator';
 
 @Controller('cats')
 export class CatsController {
+  constructor(private readonly catsService: CatsService) {}
+
   @Post()
   @HttpCode(204)
-  create(@Body() dto: CatDto): void {
-    const cat = dto.entity;
-    // TODO: this action careate a cat.
+  async create(@Body() dto: CatDto): Promise<void> {
+    await this.catsService.create(dto.entity);
   }
 
   @Get()
-  findAll(): Cat[] {
-    // TODO: This action returns all cats.
-    return [];
+  findAll(): Promise<Cat[]> {
+    return this.catsService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id): Cat {
-    // TODO: This action returns a ${id} cat.
-    return null;
+  findOne(@Param('id') id: string): Promise<Cat> {
+    return this.catsService.findOne(id);
   }
 }
