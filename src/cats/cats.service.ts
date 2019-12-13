@@ -1,10 +1,10 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException, Inject } from '@nestjs/common';
 import { Cat } from './cats';
 import { ICatsDa } from './cats.da.interface';
 
 @Injectable()
 export class CatsService {
-  constructor(private readonly catsDa: ICatsDa) {}
+  constructor(@Inject('catsDa') private readonly catsDa: ICatsDa) {}
 
   async create(cat: Cat): Promise<void> {
     await this.catsDa.create(cat);
