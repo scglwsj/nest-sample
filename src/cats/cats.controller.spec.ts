@@ -3,7 +3,6 @@ import { CatsController } from './cats.controller';
 import { CatsService } from './cats.service';
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
-import { Cat } from './cats';
 
 describe('Cats Controller', () => {
   let controller: CatsController;
