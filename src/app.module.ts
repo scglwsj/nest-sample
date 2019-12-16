@@ -4,7 +4,6 @@ import { AppService } from './app.service';
 import { CatsController } from './cats/cats.controller';
 import { CatsService } from './cats/cats.service';
 import { CatsMemoryRepository } from './cats/cats.memory.repository';
-import { ICatsDa } from './cats/cats.da.interface';
 
 @Module({
   imports: [],
