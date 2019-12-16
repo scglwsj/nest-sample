@@ -2,7 +2,7 @@ import { Controller, Get, Post, Body, HttpCode, Param } from '@nestjs/common';
 import { CatDto } from './cats.dto';
 import { Cat } from './cats';
 import { CatsService } from './cats.service';
-import { IsString } from 'class-validator';
+import { v4 as uuid } from 'uuid';
 
 @Controller('cats')
 export class CatsController {
@@ -11,7 +11,7 @@ export class CatsController {
   @Post()
   @HttpCode(204)
   async create(@Body() dto: CatDto): Promise<void> {
-    await this.catsService.create(dto.entity);
+    await this.catsService.create(new Cat(uuid(), dto.name));
   }
 
   @Get()
